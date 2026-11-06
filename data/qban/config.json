@@ -1,0 +1,102 @@
+{
+  "ai": {
+    "provider": "openai",
+    "model": "antigravity/gemini-3.8-flash",
+    "base_url": "http://127.0.0.1:3425/v1",
+    "api_key_env": "OPENAI_API_KEY",
+    "temperature": 0.3,
+    "max_tokens": 4096,
+    "throttle_sec": 0,
+    "analysis_concurrency": 1,
+    "enrichment_concurrency": 1,
+    "languages": [
+      "zh"
+    ]
+  },
+  "processing": {
+    "profiles_dir": "/Users/shuiming/自媒体/horizon/profiles",
+    "default_profile": "qban-chaojie",
+    "profile_settings": {
+      "qban-chaojie": {
+        "threshold": 7.0,
+        "topic_dedup": true
+      }
+    }
+  },
+  "display": {
+    "icon_style": "emoji"
+  },
+  "email": {
+    "enabled": false,
+    "smtp_server": "smtp.qq.com",
+    "smtp_port": 465,
+    "imap_server": "imap.qq.com",
+    "imap_port": 993,
+    "email_address": "placeholder@example.com"
+  },
+  "sources": {
+    "github": [],
+    "hackernews": {
+      "enabled": false
+    },
+    "rss": [
+      {
+        "name": "36氪·未来消费与商业零售",
+        "url": "https://36kr.com/feed",
+        "enabled": true,
+        "category": "retail-and-consumption",
+        "profile": "qban-chaojie",
+        "content_extractor": "trafilatura"
+      },
+      {
+        "name": "虎嗅·商业观察与生活消费",
+        "url": "https://www.huxiu.com/rss/0.xml",
+        "enabled": true,
+        "category": "business-breakdown",
+        "profile": "qban-chaojie",
+        "content_extractor": "trafilatura"
+      },
+      {
+        "name": "亿邦动力·电商网购与零售套路",
+        "url": "https://www.ebrun.com/rss/",
+        "enabled": true,
+        "category": "e-commerce-insight",
+        "profile": "qban-chaojie",
+        "content_extractor": "trafilatura"
+      }
+    ],
+    "reddit": {
+      "enabled": false
+    },
+    "twitter": {
+      "enabled": false
+    },
+    "ossinsight": {
+      "enabled": false
+    },
+    "telegram": {
+      "enabled": false
+    },
+    "gdelt": {
+      "enabled": false
+    },
+    "google_news": {
+      "enabled": false
+    }
+  },
+  "collection": {
+    "time_window_hours": 24
+  },
+  "digest": {
+    "max_items": 8,
+    "profile_order": [
+      "qban-chaojie"
+    ],
+    "category_groups": {},
+    "default_group": "other",
+    "default_group_limit": null
+  },
+  "webhook": {
+    "enabled": false
+  }
+}

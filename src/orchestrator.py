@@ -29,6 +29,7 @@ from .scrapers.openbb import OpenBBScraper
 from .scrapers.ossinsight import OSSInsightScraper
 from .scrapers.gdelt import GDELTScraper
 from .scrapers.google_news import GoogleNewsScraper
+from .scrapers.zhihu import ZhihuScraper
 from .ai.client import AIClient, create_ai_client
 from .ai.errors import AIProviderUnavailableError
 from .ai.analyzer import ContentAnalyzer
@@ -509,6 +510,11 @@ class HorizonOrchestrator:
             if self.config.sources.google_news and self.config.sources.google_news.enabled:
                 gn_scraper = GoogleNewsScraper(self.config.sources.google_news, client)
                 tasks.append(self._fetch_with_progress("Google News", gn_scraper, since))
+
+            # Zhihu Hot List (native official API)
+            if self.config.sources.zhihu and self.config.sources.zhihu.enabled:
+                zh_scraper = ZhihuScraper(self.config.sources.zhihu, client)
+                tasks.append(self._fetch_with_progress("Zhihu Hot", zh_scraper, since))
 
             # Fetch all concurrently
             outcomes = await asyncio.gather(*tasks)

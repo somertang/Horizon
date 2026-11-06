@@ -1,0 +1,108 @@
+{
+  "ai": {
+    "provider": "openai",
+    "model": "antigravity/gemini-3.8-flash",
+    "base_url": "http://127.0.0.1:3425/v1",
+    "api_key_env": "OPENAI_API_KEY",
+    "temperature": 0.3,
+    "max_tokens": 4096,
+    "throttle_sec": 0,
+    "analysis_concurrency": 1,
+    "enrichment_concurrency": 1,
+    "languages": [
+      "zh"
+    ]
+  },
+  "processing": {
+    "profiles_dir": "/Users/shuiming/自媒体/horizon/profiles",
+    "default_profile": "renjian-wanji",
+    "profile_settings": {
+      "renjian-wanji": {
+        "threshold": 7.0,
+        "topic_dedup": true
+      }
+    }
+  },
+  "display": {
+    "icon_style": "emoji"
+  },
+  "email": {
+    "enabled": false,
+    "smtp_server": "smtp.qq.com",
+    "smtp_port": 465,
+    "imap_server": "imap.qq.com",
+    "imap_port": 993,
+    "email_address": "placeholder@example.com"
+  },
+  "sources": {
+    "github": [],
+    "hackernews": {
+      "enabled": false
+    },
+    "rss": [
+      {
+        "name": "少数派·数字生活与个人成长",
+        "url": "https://sspai.com/feed",
+        "enabled": true,
+        "category": "life-and-career",
+        "profile": "renjian-wanji",
+        "content_extractor": "trafilatura"
+      },
+      {
+        "name": "极客公园·科技反思与时代洞察",
+        "url": "https://www.geekpark.net/rss",
+        "enabled": true,
+        "category": "tech-reflection",
+        "profile": "renjian-wanji",
+        "content_extractor": "trafilatura"
+      },
+      {
+        "name": "36氪·商业与职场深度观察",
+        "url": "https://36kr.com/feed",
+        "enabled": true,
+        "category": "career-insight",
+        "profile": "renjian-wanji",
+        "content_extractor": "trafilatura"
+      }
+    ],
+    "reddit": {
+      "enabled": false
+    },
+    "twitter": {
+      "enabled": false
+    },
+    "ossinsight": {
+      "enabled": false
+    },
+    "telegram": {
+      "enabled": false
+    },
+    "gdelt": {
+      "enabled": false
+    },
+    "google_news": {
+      "enabled": false
+    },
+    "zhihu": {
+      "enabled": true,
+      "fetch_limit": 15,
+      "category": "career-insight",
+      "profile": "renjian-wanji"
+    }
+  },
+  "collection": {
+    "time_window_hours": 24
+  },
+  "digest": {
+    "max_items": 8,
+    "profile_order": [
+      "renjian-wanji"
+    ],
+    "category_groups": {},
+    "default_group": "other",
+    "default_group_limit": null
+  },
+  "webhook": {
+    "enabled": false
+  }
+}

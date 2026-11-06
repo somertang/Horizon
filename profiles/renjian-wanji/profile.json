@@ -1,0 +1,19 @@
+{
+  "id": "renjian-wanji",
+  "name": "人间晚记·中年职场与第二曲线雷达",
+  "display_names": {
+    "zh": "人间晚记雷达",
+    "en": "Renjian Wanji Radar"
+  },
+  "match": "match.md",
+  "analysis": "analysis.md",
+  "enrichment": {
+    "prompt": "enrichment.md",
+    "blocks": [
+      {"id": "summary", "type": "section", "tools": [], "primary": true},
+      {"id": "midlife_insight", "type": "section", "tools": [], "optional": true},
+      {"id": "gzh_article_angle", "type": "section", "tools": [], "optional": true},
+      {"id": "golden_quotes", "type": "section", "tools": [], "optional": true}
+    ]
+  }
+}

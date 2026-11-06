@@ -20,6 +20,7 @@ class SourceType(str, Enum):
     OSSINSIGHT = "ossinsight"
     GDELT = "gdelt"
     GOOGLE_NEWS = "google_news"
+    ZHIHU = "zhihu"
 
 
 class SourceDefinition(NamedTuple):
@@ -41,6 +42,7 @@ SOURCE_REGISTRY = {
     SourceType.OSSINSIGHT.value: SourceDefinition("ossinsight"),
     SourceType.GDELT.value: SourceDefinition("gdelt"),
     SourceType.GOOGLE_NEWS.value: SourceDefinition("google_news"),
+    SourceType.ZHIHU.value: SourceDefinition("zhihu"),
 }
 
 ProfileRoute = Optional[Union[str, List[str]]]
@@ -488,6 +490,15 @@ class GoogleNewsConfig(BaseModel):
     profile: ProfileRoute = None
 
 
+class ZhihuConfig(BaseModel):
+    """Zhihu trending hot-list scraper configuration."""
+
+    enabled: bool = False
+    fetch_limit: int = 20
+    category: Optional[str] = "career-insight"
+    profile: ProfileRoute = None
+
+
 class SourcesConfig(BaseModel):
     """All sources configuration."""
 
@@ -501,6 +512,7 @@ class SourcesConfig(BaseModel):
     ossinsight: OSSInsightConfig = Field(default_factory=OSSInsightConfig)
     gdelt: Optional[GDELTConfig] = None
     google_news: Optional[GoogleNewsConfig] = None
+    zhihu: Optional[ZhihuConfig] = None
 
 
 class WebhookConfig(BaseModel):

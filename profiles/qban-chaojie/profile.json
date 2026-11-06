@@ -1,0 +1,19 @@
+{
+  "id": "qban-chaojie",
+  "name": "Q版商业拆解·身边消费避坑雷达",
+  "display_names": {
+    "zh": "Q版拆解雷达",
+    "en": "Q-Style Business Breakdown Radar"
+  },
+  "match": "match.md",
+  "analysis": "analysis.md",
+  "enrichment": {
+    "prompt": "enrichment.md",
+    "blocks": [
+      {"id": "summary", "type": "section", "tools": [], "primary": true},
+      {"id": "merchant_calculation", "type": "section", "tools": [], "optional": true},
+      {"id": "consumer_countermeasure", "type": "section", "tools": [], "optional": true},
+      {"id": "visual_comic_angle", "type": "section", "tools": [], "optional": true}
+    ]
+  }
+}

@@ -30,6 +30,11 @@ from .scrapers.ossinsight import OSSInsightScraper
 from .scrapers.gdelt import GDELTScraper
 from .scrapers.google_news import GoogleNewsScraper
 from .scrapers.zhihu import ZhihuScraper
+from .scrapers.weibo import WeiboScraper
+from .scrapers.baidu import BaiduScraper
+from .scrapers.youtube import YouTubeScraper
+from .scrapers.maimai import MaimaiScraper
+from .scrapers.tophub import TophubScraper
 from .ai.client import AIClient, create_ai_client
 from .ai.errors import AIProviderUnavailableError
 from .ai.analyzer import ContentAnalyzer
@@ -515,6 +520,31 @@ class HorizonOrchestrator:
             if self.config.sources.zhihu and self.config.sources.zhihu.enabled:
                 zh_scraper = ZhihuScraper(self.config.sources.zhihu, client)
                 tasks.append(self._fetch_with_progress("Zhihu Hot", zh_scraper, since))
+
+            # Weibo Hot Search (native official API)
+            if self.config.sources.weibo and self.config.sources.weibo.enabled:
+                weibo_scraper = WeiboScraper(self.config.sources.weibo, client)
+                tasks.append(self._fetch_with_progress("Weibo Hot", weibo_scraper, since))
+
+            # Baidu Hot List (via iTab top API)
+            if self.config.sources.baidu and self.config.sources.baidu.enabled:
+                baidu_scraper = BaiduScraper(self.config.sources.baidu, client)
+                tasks.append(self._fetch_with_progress("Baidu Hot", baidu_scraper, since))
+
+            # YouTube Channels
+            if self.config.sources.youtube and self.config.sources.youtube.enabled:
+                youtube_scraper = YouTubeScraper(self.config.sources.youtube, client)
+                tasks.append(self._fetch_with_progress("YouTube", youtube_scraper, since))
+
+            # Maimai Career Hot Topics (via Tophub)
+            if self.config.sources.maimai and self.config.sources.maimai.enabled:
+                maimai_scraper = MaimaiScraper(self.config.sources.maimai, client)
+                tasks.append(self._fetch_with_progress("Maimai Hot", maimai_scraper, since))
+
+            # Generic Tophub nodes (e.g. ThePaper hot list)
+            if self.config.sources.tophub and self.config.sources.tophub.enabled:
+                tophub_scraper = TophubScraper(self.config.sources.tophub, client)
+                tasks.append(self._fetch_with_progress("Tophub", tophub_scraper, since))
 
             # Fetch all concurrently
             outcomes = await asyncio.gather(*tasks)

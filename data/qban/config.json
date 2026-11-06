@@ -1,14 +1,14 @@
 {
   "ai": {
     "provider": "openai",
-    "model": "antigravity/gemini-3.8-flash",
+    "model": "cursor/auto",
     "base_url": "http://127.0.0.1:3425/v1",
     "api_key_env": "OPENAI_API_KEY",
     "temperature": 0.3,
     "max_tokens": 4096,
     "throttle_sec": 0,
-    "analysis_concurrency": 1,
-    "enrichment_concurrency": 1,
+    "analysis_concurrency": 5,
+    "enrichment_concurrency": 2,
     "languages": [
       "zh"
     ]
@@ -18,7 +18,7 @@
     "default_profile": "qban-chaojie",
     "profile_settings": {
       "qban-chaojie": {
-        "threshold": 7.0,
+        "threshold": 6.0,
         "topic_dedup": true
       }
     }
@@ -41,32 +41,68 @@
     },
     "rss": [
       {
-        "name": "36氪·未来消费与商业零售",
-        "url": "https://36kr.com/feed",
-        "enabled": true,
+        "name": "36氪·未来消费与商业零售（RSS 镜像不稳定，改由 Tophub 节点采集）",
+        "url": "https://hub.slarker.me/36kr/newsflashes",
+        "enabled": false,
         "category": "retail-and-consumption",
         "profile": "qban-chaojie",
         "content_extractor": "trafilatura"
       },
       {
-        "name": "虎嗅·商业观察与生活消费",
-        "url": "https://www.huxiu.com/rss/0.xml",
-        "enabled": true,
+        "name": "虎嗅·商业观察与生活消费（RSS 镜像不稳定，改由 Tophub 节点采集）",
+        "url": "https://hub.slarker.me/huxiu/article",
+        "enabled": false,
         "category": "business-breakdown",
         "profile": "qban-chaojie",
         "content_extractor": "trafilatura"
       },
       {
-        "name": "亿邦动力·电商网购与零售套路",
+        "name": "亿邦动力·电商网购与零售套路（源已失效，暂停）",
         "url": "https://www.ebrun.com/rss/",
-        "enabled": true,
+        "enabled": false,
         "category": "e-commerce-insight",
         "profile": "qban-chaojie",
         "content_extractor": "trafilatura"
+      },
+      {
+        "name": "澎湃新闻·精选头条与权威曝光（镜像失效，改由 Tophub 节点采集）",
+        "url": "https://hub.slarker.me/thepaper/featured",
+        "enabled": false,
+        "category": "investigation-and-rights",
+        "profile": "qban-chaojie",
+        "content_extractor": "trafilatura"
+      },
+      {
+        "name": "微信公众号·老爸评测",
+        "url": "http://localhost:5200/api/articles/rss/%E8%80%81%E7%88%B8%E8%AF%84%E6%B5%8B",
+        "enabled": true,
+        "category": "product-testing-debunk",
+        "profile": "qban-chaojie"
+      },
+      {
+        "name": "微信公众号·品牌观察官",
+        "url": "http://localhost:5200/api/articles/rss/%E5%93%81%E7%89%8C%E8%A7%82%E5%AF%9F%E5%AE%98",
+        "enabled": true,
+        "category": "brand-business-strategy",
+        "profile": "qban-chaojie"
       }
     ],
     "reddit": {
-      "enabled": false
+      "enabled": true,
+      "subreddits": [
+        {
+          "subreddit": "shrinkflation",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "week",
+          "fetch_limit": 10,
+          "min_score": 0,
+          "category": "packaging-shrink",
+          "profile": "qban-chaojie"
+        }
+      ],
+      "users": [],
+      "fetch_comments": 0
     },
     "twitter": {
       "enabled": false
@@ -82,6 +118,53 @@
     },
     "google_news": {
       "enabled": false
+    },
+    "zhihu": {
+      "enabled": true,
+      "fetch_limit": 15,
+      "category": "consumer-psychology",
+      "profile": "qban-chaojie"
+    },
+    "weibo": {
+      "enabled": true,
+      "fetch_limit": 15,
+      "category": "consumer-exposure",
+      "profile": "qban-chaojie"
+    },
+    "baidu": {
+      "enabled": true,
+      "fetch_limit": 15,
+      "category": "daily-life-trends",
+      "profile": "qban-chaojie"
+    },
+    "tophub": {
+      "enabled": true,
+      "nodes": [
+        {
+          "name": "澎湃新闻·热榜",
+          "url": "https://tophub.today/n/wWmoO5Rd4E",
+          "enabled": true,
+          "fetch_limit": 20,
+          "category": "investigation-and-rights",
+          "profile": "qban-chaojie"
+        },
+        {
+          "name": "36氪·24小时热榜",
+          "url": "https://tophub.today/n/Q1Vd5Ko85R",
+          "enabled": true,
+          "fetch_limit": 15,
+          "category": "retail-and-consumption",
+          "profile": "qban-chaojie"
+        },
+        {
+          "name": "虎嗅·热文",
+          "url": "https://tophub.today/n/5VaobgvAj1",
+          "enabled": true,
+          "fetch_limit": 15,
+          "category": "business-breakdown",
+          "profile": "qban-chaojie"
+        }
+      ]
     }
   },
   "collection": {

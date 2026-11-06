@@ -21,6 +21,11 @@ class SourceType(str, Enum):
     GDELT = "gdelt"
     GOOGLE_NEWS = "google_news"
     ZHIHU = "zhihu"
+    WEIBO = "weibo"
+    BAIDU = "baidu"
+    YOUTUBE = "youtube"
+    MAIMAI = "maimai"
+    TOPHUB = "tophub"
 
 
 class SourceDefinition(NamedTuple):
@@ -43,6 +48,11 @@ SOURCE_REGISTRY = {
     SourceType.GDELT.value: SourceDefinition("gdelt"),
     SourceType.GOOGLE_NEWS.value: SourceDefinition("google_news"),
     SourceType.ZHIHU.value: SourceDefinition("zhihu"),
+    SourceType.WEIBO.value: SourceDefinition("weibo"),
+    SourceType.BAIDU.value: SourceDefinition("baidu"),
+    SourceType.YOUTUBE.value: SourceDefinition("youtube", item_fields=("channels",)),
+    SourceType.MAIMAI.value: SourceDefinition("maimai"),
+    SourceType.TOPHUB.value: SourceDefinition("tophub", item_fields=("nodes",)),
 }
 
 ProfileRoute = Optional[Union[str, List[str]]]
@@ -499,6 +509,72 @@ class ZhihuConfig(BaseModel):
     profile: ProfileRoute = None
 
 
+class WeiboConfig(BaseModel):
+    """Weibo hot search configuration."""
+
+    enabled: bool = False
+    fetch_limit: int = 15
+    category: Optional[str] = "social-trends"
+    profile: ProfileRoute = None
+
+
+class BaiduConfig(BaseModel):
+    """Baidu hot search configuration via iTab top API."""
+
+    enabled: bool = False
+    fetch_limit: int = 15
+    api_url: Optional[str] = None
+    category: Optional[str] = "social-trends"
+    profile: ProfileRoute = None
+
+
+class YouTubeChannelConfig(BaseModel):
+    """Configuration for monitoring a specific YouTube channel."""
+
+    handle: str  # e.g. "@michaelsuen5327"
+    name: Optional[str] = None
+    enabled: bool = True
+    category: Optional[str] = None
+    profile: ProfileRoute = None
+
+
+class YouTubeConfig(BaseModel):
+    """YouTube channels scraper configuration."""
+
+    enabled: bool = False
+    channels: List[YouTubeChannelConfig] = Field(default_factory=list)
+    fetch_limit: int = 5
+    category: Optional[str] = "life-growth"
+    profile: ProfileRoute = None
+
+
+class MaimaiConfig(BaseModel):
+    """Maimai career trending topics scraper configuration via Tophub."""
+
+    enabled: bool = False
+    fetch_limit: int = 15
+    category: Optional[str] = "career-reality"
+    profile: ProfileRoute = None
+
+
+class TophubNodeConfig(BaseModel):
+    """Configuration for one Tophub (今日热榜) node."""
+
+    name: str
+    url: HttpUrl
+    enabled: bool = True
+    fetch_limit: int = 20
+    category: Optional[str] = None
+    profile: ProfileRoute = None
+
+
+class TophubConfig(BaseModel):
+    """Generic Tophub node scraper configuration."""
+
+    enabled: bool = False
+    nodes: List[TophubNodeConfig] = Field(default_factory=list)
+
+
 class SourcesConfig(BaseModel):
     """All sources configuration."""
 
@@ -513,6 +589,11 @@ class SourcesConfig(BaseModel):
     gdelt: Optional[GDELTConfig] = None
     google_news: Optional[GoogleNewsConfig] = None
     zhihu: Optional[ZhihuConfig] = None
+    weibo: Optional[WeiboConfig] = None
+    baidu: Optional[BaiduConfig] = None
+    youtube: Optional[YouTubeConfig] = None
+    maimai: Optional[MaimaiConfig] = None
+    tophub: Optional[TophubConfig] = None
 
 
 class WebhookConfig(BaseModel):

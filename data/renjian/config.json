@@ -1,14 +1,14 @@
 {
   "ai": {
     "provider": "openai",
-    "model": "antigravity/gemini-3.8-flash",
+    "model": "cursor/auto",
     "base_url": "http://127.0.0.1:3425/v1",
     "api_key_env": "OPENAI_API_KEY",
     "temperature": 0.3,
     "max_tokens": 4096,
     "throttle_sec": 0,
-    "analysis_concurrency": 1,
-    "enrichment_concurrency": 1,
+    "analysis_concurrency": 5,
+    "enrichment_concurrency": 2,
     "languages": [
       "zh"
     ]
@@ -63,13 +63,111 @@
         "category": "career-insight",
         "profile": "renjian-wanji",
         "content_extractor": "trafilatura"
+      },
+      {
+        "name": "澎湃新闻·精选头条与时代脉搏",
+        "url": "https://hub.slarker.me/thepaper/featured",
+        "enabled": true,
+        "category": "social-observation",
+        "profile": "renjian-wanji",
+        "content_extractor": "trafilatura"
+      },
+      {
+        "name": "微信公众号·洞见",
+        "url": "http://localhost:5200/api/articles/rss/%E6%B4%9E%E8%A7%81",
+        "enabled": true,
+        "category": "life-philosophy",
+        "profile": "renjian-wanji"
+      },
+      {
+        "name": "微信公众号·李雪爱与自由",
+        "url": "http://localhost:5200/api/articles/rss/%E6%9D%8E%E9%9B%AA%E7%88%B1%E4%B8%8E%E8%87%AA%E7%94%B1",
+        "enabled": true,
+        "category": "inner-growth",
+        "profile": "renjian-wanji"
+      },
+      {
+        "name": "微信公众号·九边",
+        "url": "http://localhost:5200/api/articles/rss/%E4%B9%9D%E8%BE%B9",
+        "enabled": true,
+        "category": "macro-career",
+        "profile": "renjian-wanji"
+      },
+      {
+        "name": "微信公众号·涂磊",
+        "url": "http://localhost:5200/api/articles/rss/%E6%B6%82%E7%A3%8A",
+        "enabled": true,
+        "category": "social-reality",
+        "profile": "renjian-wanji"
+      },
+      {
+        "name": "微信公众号·十点读书",
+        "url": "http://localhost:5200/api/articles/rss/%E5%8D%81%E7%82%B9%E8%AF%BB%E4%B9%A6",
+        "enabled": true,
+        "category": "mindset-depth",
+        "profile": "renjian-wanji"
       }
     ],
     "reddit": {
-      "enabled": false
+      "enabled": true,
+      "subreddits": [
+        {
+          "subreddit": "ExperiencedDevs",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 10,
+          "min_score": 15,
+          "category": "career-reality",
+          "profile": "renjian-wanji"
+        },
+        {
+          "subreddit": "careerguidance",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 10,
+          "min_score": 20,
+          "category": "career-reality",
+          "profile": "renjian-wanji"
+        },
+        {
+          "subreddit": "solopreneur",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 10,
+          "min_score": 10,
+          "category": "second-curve",
+          "profile": "renjian-wanji"
+        }
+      ],
+      "users": [],
+      "fetch_comments": 3
     },
     "twitter": {
-      "enabled": false
+      "enabled": true,
+      "mode": "apify",
+      "users": [
+        "paulg",
+        "naval",
+        "levelsio"
+      ],
+      "keywords": [
+        "tech layoffs",
+        "AI replacing developers"
+      ],
+      "fetch_limit": 10,
+      "category": "industry-reflection",
+      "profile": "renjian-wanji",
+      "fetch_reply_text": false,
+      "max_replies_per_tweet": 3,
+      "max_tweets_to_expand": 10,
+      "reply_min_likes": 0,
+      "apify_token_env": "APIFY_TOKEN",
+      "actor_id": "altimis~scweet",
+      "cookie_dir": "data",
+      "cookie_file_pattern": "x_cookies_*.json"
     },
     "ossinsight": {
       "enabled": false
@@ -87,6 +185,39 @@
       "enabled": true,
       "fetch_limit": 15,
       "category": "career-insight",
+      "profile": "renjian-wanji"
+    },
+    "weibo": {
+      "enabled": true,
+      "fetch_limit": 15,
+      "category": "social-trends",
+      "profile": "renjian-wanji"
+    },
+    "baidu": {
+      "enabled": true,
+      "fetch_limit": 15,
+      "category": "social-trends",
+      "profile": "renjian-wanji"
+    },
+    "youtube": {
+      "enabled": true,
+      "channels": [
+        {
+          "handle": "@michaelsuen5327",
+          "name": "Michael大麦哥",
+          "enabled": true,
+          "category": "life-growth",
+          "profile": "renjian-wanji"
+        }
+      ],
+      "fetch_limit": 5,
+      "category": "life-growth",
+      "profile": "renjian-wanji"
+    },
+    "maimai": {
+      "enabled": true,
+      "fetch_limit": 15,
+      "category": "career-reality",
       "profile": "renjian-wanji"
     }
   },
